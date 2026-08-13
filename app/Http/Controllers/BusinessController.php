@@ -102,7 +102,7 @@ class BusinessController extends Controller
 //     'logged_in_user_id' => $request->user()->id,
 //     'request_data' => $request->all(),
 // ]);
-    $business = Business::find($id);
+    $business = Business::findOrFail($id);
 
     if (!$business) {
         return response()->json([
@@ -146,7 +146,7 @@ class BusinessController extends Controller
     // DELETE BUSINESS
     public function destroy(Request $request, $id)
 {
-    $business = Business::find($id);
+    $business = Business::findOrFail($id);
 
     if (!$business) {
         return response()->json([

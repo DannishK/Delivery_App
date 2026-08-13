@@ -73,7 +73,7 @@ return response()->json([
     // LOGOUT
     public function logout(Request $request)
 {
-    $user = $request->user();
+    $user = $request->user()->tokens()->delete();
 
     if ($user && $user->currentAccessToken()) {
         $user->currentAccessToken()->delete();
