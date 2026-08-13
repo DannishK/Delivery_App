@@ -25,7 +25,8 @@ class User extends Authenticatable
     return $this->hasOne(Business::class);
 }
     protected $fillable = [
-        'name',
+        'first_name',
+        'last_name',
         'email',
         'password',
         'phone',

@@ -8,7 +8,7 @@ use Illuminate\Http\Request;
 class RiderController extends Controller
 {
       // CREATE RIDER PROFILE
-    public function store(Request $request)
+    public function createRider(Request $request)
     {
         $user = $request->user();
 
@@ -39,7 +39,7 @@ class RiderController extends Controller
         $validated = $request->validate([
             'id_number' => 'required|string|max:50',
             'vehicle_type' => 'required|string|max:50',
-            'vehicle_registration' => 'required|string|max:50',
+            'vehicle_registration_number' => 'required|string|max:50',
             'license_number' => 'required|string|max:100',
             'license_expiry' => 'required|date',
         ]);
@@ -48,7 +48,7 @@ class RiderController extends Controller
             'user_id' => $user->id,
             'id_number' => $validated['id_number'],
             'vehicle_type' => $validated['vehicle_type'],
-            'vehicle_registration' => $validated['vehicle_registration'],
+            'vehicle_registration_number' => $validated['vehicle_registration_number'],
             'license_number' => $validated['license_number'],
             'license_expiry' => $validated['license_expiry'],
         ]);
@@ -62,7 +62,7 @@ class RiderController extends Controller
 
 
     // READ ALL RIDERS
-    public function index()
+    public function readAllRiders()
     {
         $riders = Rider::with('user')->get();
 
@@ -74,7 +74,7 @@ class RiderController extends Controller
 
 
     // READ ONE RIDER
-    public function show($id)
+    public function readRider($id)
     {
         $rider = Rider::with('user')
             ->with('groups')
@@ -126,7 +126,7 @@ class RiderController extends Controller
         $validated = $request->validate([
             'id_number' => 'sometimes|string|max:50',
             'vehicle_type' => 'sometimes|string|max:50',
-            'vehicle_registration' => 'sometimes|string|max:50',
+            'vehicle_registration_number' => 'sometimes|string|max:50',
             'license_number' => 'sometimes|string|max:100',
             'license_expiry' => 'sometimes|date',
             'availability_status' => 'sometimes|in:available,busy,offline',
