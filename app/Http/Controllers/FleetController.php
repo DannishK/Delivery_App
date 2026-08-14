@@ -8,7 +8,7 @@ use Illuminate\Http\Request;
 class FleetController extends Controller
 {
      // CREATE FLEET / TRANSPORTER GROUP
-    public function store(Request $request)
+    public function storeFleet(Request $request)
     {
         $user = $request->user();
 
@@ -28,9 +28,9 @@ class FleetController extends Controller
         }
 
         $validated = $request->validate([
-            'name' => 'required|string|max:150',
+            'fleet_name' => 'required|string|max:150',
             'description' => 'nullable|string',
-            'phone' => 'nullable|string|max:20',
+            'phone_number' => 'nullable|string|max:20',
             'email' => 'nullable|email|max:150',
             'address' => 'nullable|string|max:255',
             'registration_number' => 'nullable|string|max:100',
@@ -38,9 +38,9 @@ class FleetController extends Controller
 
         $fleet = Fleet::create([
             'manager_id' => $user->id,
-            'name' => $validated['name'],
+            'fleet_name' => $validated['fleet_name'],
             'description' => $validated['description'] ?? null,
-            'phone' => $validated['phone'] ?? null,
+            'phone_number' => $validated['phone_number'] ?? null,
             'email' => $validated['email'] ?? null,
             'address' => $validated['address'] ?? null,
             'registration_number' => $validated['registration_number'] ?? null,
@@ -55,7 +55,7 @@ class FleetController extends Controller
 
 
     // READ ALL FLEETS
-    public function index()
+    public function readAllFleets()
     {
         $fleets = Fleet::with('manager')->get();
 
@@ -67,7 +67,7 @@ class FleetController extends Controller
 
 
     // READ ONE FLEET
-    public function show($id)
+    public function readFleet($id)
     {
         $fleet = Fleet::with('manager')
             ->with('members')
@@ -117,9 +117,9 @@ class FleetController extends Controller
         }
 
         $validated = $request->validate([
-            'name' => 'sometimes|string|max:150',
+            'fleet_name' => 'sometimes|string|max:150',
             'description' => 'sometimes|nullable|string',
-            'phone' => 'sometimes|nullable|string|max:20',
+            'phone_number' => 'sometimes|nullable|string|max:20',
             'email' => 'sometimes|nullable|email|max:150',
             'address' => 'sometimes|nullable|string|max:255',
             'registration_number' => 'sometimes|nullable|string|max:100',

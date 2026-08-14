@@ -14,9 +14,9 @@ class Fleet extends Model
 
     protected $fillable = [
         'manager_id',
-        'name',
+        'fleet_name',
         'description',
-        'phone',
+        'phone_number',
         'email',
         'address',
         'registration_number',

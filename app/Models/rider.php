@@ -5,7 +5,7 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
-class rider extends Model
+class Rider extends Model
 {
      use HasFactory;
 
@@ -16,7 +16,7 @@ class rider extends Model
         'id_number',
         'profile_photo',
         'vehicle_type',
-        'vehicle_registration',
+        'vehicle_registration_number',
         'license_number',
         'license_expiry',
         'availability_status',

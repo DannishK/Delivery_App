@@ -17,7 +17,7 @@ return new class extends Migration
             $table->string('last_name');
             $table->string('email')->unique();
             $table->string('phone')->unique()->nullable();
-            $table->enum('role', ['fleet_manager', 'rider','business_owner'])->unique();
+            $table->enum('role', ['fleet_manager', 'rider','business_owner']);
             $table->timestamp('email_verified_at')->nullable();
             $table->string('password');
             $table->rememberToken();

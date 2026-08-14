@@ -46,7 +46,8 @@ class FleetMemberController extends Controller
         }
 
         // Check if rider is already in this fleet
-        $existingMember = fleetMember::whereEquals('fleet_id', $validated['fleet_id'])
+        $existingMember = fleetMember::query()
+            ->where('fleet_id', $validated['fleet_id'])
             ->where('rider_id', $validated['rider_id'])
             ->first();
 
@@ -74,7 +75,7 @@ class FleetMemberController extends Controller
 
 
     // READ ALL MEMBERS
-    public function index()
+    public function readAllFleetMembers()
     {
         $members = fleetMember::with([
             'rider.user',
@@ -89,7 +90,7 @@ class FleetMemberController extends Controller
 
 
     // READ ONE MEMBER
-    public function show($id)
+    public function readFleetMember($id)
     {
         $member = fleetMember::with([
             'rider.user',
@@ -142,7 +143,7 @@ class FleetMemberController extends Controller
 
         $validated = $request->validate([
             'role' => 'sometimes|in:member,leader',
-            'status' => 'sometimes|in:pending,active,suspended',
+            'status' => 'sometimes|in:pending,active,inactive,suspended',
         ]);
 
         $member->update($validated);
